@@ -1,0 +1,26 @@
+input {
+    height: 20px;
+    width: 200px;
+}
+
+.phone-button {
+    cursor: pointer;
+    background: #222A3A;
+    color: #fff;
+    font-weight: 900;
+    border: none;
+    border-radius: 3px;
+    padding: 5px;
+    margin: 5px;
+    width: 55px;
+}
+
+.phone-letters {
+    margin-left: 2px;
+}
+
+.phone-row {
+    text-align: center;
+    width: 200px;
+}
+
