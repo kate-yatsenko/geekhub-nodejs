@@ -1,36 +1,28 @@
 const array = [1, 2, 3, 7, 15, -3, 21];
 
 function findMax(nums) {
-  let maxNumber = Number.NEGATIVE_INFINITY;
-  nums.forEach(num => {
-    if (num > maxNumber) {
-      maxNumber = num;
-    }
-  });
-  return maxNumber;
+  return nums.reduce((a, b) => a > b ? a : b);
 }
 
 function findMin(nums) {
-  let minNumber = Number.POSITIVE_INFINITY;
-  nums.forEach(num => {
-    if (num < minNumber) {
-      minNumber = num;
-    }
-  });
-  return minNumber;
+  return nums.reduce((a, b) => a < b ? a : b);
 }
 
 function sum(nums) {
-  return nums.reduce((a, b) => a + b)
+  return nums.reduce((a, b) => {
+    if (/\D/.test(b)) {
+      return a
+    }
+    return a + b
+  })
 }
 
 function replaceMinAndMax(nums) {
   const maxNumber = findMax(nums),
-    minNumber = findMin(nums),
-    maxIndex = nums.indexOf(maxNumber),
-    minIndex = nums.indexOf(minNumber);
-  nums[maxIndex] = minNumber;
-  nums[minIndex] = maxNumber;
+    minNumber = findMin(nums);
+
+  nums[nums.indexOf(maxNumber)] = minNumber;
+  nums[nums.indexOf(minNumber)] = maxNumber;
 
   return {
     maxNumber,
@@ -60,15 +52,17 @@ function replace(nums) {
 
 function compareStrings(firstString, secondString) {
   let points = 0;
-  const maxLength = findMax([secondString.length, firstString.length]);
+  const handledSecondString = secondString.split('');
+
+  const maxLength = Math.max(secondString.length, firstString.length);
   firstString.split('').forEach(letter => {
-    const index = secondString.indexOf(letter);
+    const index = handledSecondString.indexOf(letter);
     if (index !== -1) {
       points += 1;
-      secondString.split('').splice(index, 1)
+      handledSecondString.splice(index, 1);
     }
   });
-  return points / maxLength * 100 + '%'
+  return (points / maxLength * 100).toFixed(2) + '%'
 }
 
 function calculate(exp) {
@@ -84,7 +78,7 @@ function calculate(exp) {
     '*': (a, b) => a * b,
     '/': (a, b) => a / b,
   };
-  return methods[newExp[operator]](+numbers[0], +numbers[1])
+  return (methods[newExp[operator]](+numbers[0], +numbers[1])).toFixed(2)
 }
 
 console.log(replaceMinAndMax(array));
