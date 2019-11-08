@@ -1,11 +1,7 @@
 const array = [1, 2, 3, 7, 15, -3, 21];
 
-function findMax(nums) {
-  return nums.reduce((a, b) => a > b ? a : b);
-}
-
-function findMin(nums) {
-  return nums.reduce((a, b) => a < b ? a : b);
+function findCritical(arr, sign) {
+  return arr.reduce((a, b) => sign * (a - b) > 0 ? a : b);
 }
 
 function sum(nums) {
@@ -18,8 +14,8 @@ function sum(nums) {
 }
 
 function replaceMinAndMax(nums) {
-  const maxNumber = findMax(nums),
-    minNumber = findMin(nums);
+  const maxNumber = findCritical(nums, 1),
+    minNumber = findCritical(nums, -1);
 
   nums[nums.indexOf(maxNumber)] = minNumber;
   nums[nums.indexOf(minNumber)] = maxNumber;
