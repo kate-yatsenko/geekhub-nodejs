@@ -6,9 +6,7 @@ function findCritical(arr, sign) {
 
 function sum(nums) {
   return nums.reduce((a, b) => {
-    if (/\D/.test(b)) {
-      return a
-    }
+    if (/\D/.test(b)) return a;
     return a + b
   })
 }
@@ -33,7 +31,9 @@ function callback(...arguments) {
   return func(...arguments)
 }
 
-function replace(nums) {
+function replace(num) {
+  if (/\D/.test(num)) console.error(`Invalid number: ${num}`);
+  const nums = Array.from(Array(num).keys());
   return nums.map((num) => {
     if (!(num % 3) && !(num % 7)) {
       return 'foobar'
@@ -81,6 +81,6 @@ console.log(replaceMinAndMax(array));
 callback(1, 2, function (...arguments) {
   console.log('callback', arguments)
 });
-console.log(replace(array));
+console.log(replace(25));
 console.log(compareStrings('work', 'awork'));
 console.log(calculate('1.1  + 3'));
