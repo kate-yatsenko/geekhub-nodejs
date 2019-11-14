@@ -2,7 +2,7 @@ const myPow = (num, deg) => {
   let result;
 
   if (!Number.isInteger(deg)) throw `Invalid degree: ${deg}`;
-  else if (Number.isNaN(num) || num < -100  || num > 100) {
+  else if ((/\D/).test(num) || num < -100  || num > 100) {
     throw `Invalid number: ${num}`;
   }
 
